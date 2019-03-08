@@ -63,6 +63,7 @@
           <div class="row-fluid">
             <select class="selectpicker" id ="enemy" data-show-subtext="true" data-live-search="true">
               <option data-subtext="">Choose an Enemy!</option>
+              <option data-subtext="BIG BAD MONSTER">Austin</option>
                <!-- Abberation -->
                <option data-subtext="Abberation">Aboleth</option>
                <option data-subtext="Abberation">Chuul</option>
@@ -70,13 +71,12 @@
                <option data-subtext="Abberation">Gibbering Mouther</option>
                <option data-subtext="Abberation">Otyugh</option>
                <!-- Beast -->
-
+              
 
               
               
               
               <!-- Undead Monsters -->
-              
               <option data-subtext="Undead">Ghoul</option>
               <option data-subtext="Undead">Lich</option>
               <option data-subtext="Undead">Minotaur Skeleton</option>
@@ -153,7 +153,7 @@
    
    
    var killingBlowWords = ["killing", "destroying", "eradicating", "annihilating","obliterating", "eliminating", "exterminating", "terminating", "slaughtering", "decimating"];
-   var dieVerbs = ["dies", "perishes", "breathes its last breathe", "is eradicated" , "life force is destroyed", "bleeds out"]
+   var dieVerbs = ["dies", "perishes", "breathes its last breathe", "is eradicated", "passes away", "bleeds out", "bites the dust", "deceases", "meets it maker", "succumbs to its wounds", "rendered lifeless"];
 
    var adverbs = ["slowly", "elegantly", "precisely", "quickly", "sadly", "humbly", "proudly", "shockingly", "calmly", "passionately"];
    var enemyType;
@@ -195,7 +195,7 @@
     
     function sentence(){
       var rand1 = Math.floor(Math.random() * 10);
-      var rand2 = Math.floor(Math.random() * 6);
+      var rand2 = Math.floor(Math.random() * 11);
       var sentenceStructureRand = Math.floor(Math.random() * 4);  
       var verbs = getVerbs();
       console.log(verbs)
