@@ -1,0 +1,6 @@
+function generator(weapon, enemy){
+    
+
+
+
+}

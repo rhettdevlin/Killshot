@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>KillShot</title>
+      <!-- Favicon -->
+      <link href="../img/favicon.ico" rel="icon" type="image/x-icon" />
+
+    <!-- Bootstrap core CSS -->
+    <link href="../vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href ="../node_modules/bootstrap-select/dist/css/bootstrap-select.css" rel="stylesheet">
+
+    <!---CUSTOM CSS-->
+    <link href ="styles/killshot.css" rel="stylesheet">
+  </head>
+
+  <body>
+      <nav class="navbar navbar-light bg-dark">
+          <span class="navbar-text">
+             
+          </span>
+        </nav>
+
+
+    <!-- Page Content -->
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 text-center">
+          <h1 class ="mt-4"> KillShot Generator!</h1>
+          <form>
+          <h5 class="mt-5">Select Weapon</h5>
+          <div class="row-fluid">
+            <select class="selectpicker" id = "weapon" data-show-subtext="true" data-live-search="true">
+
+              <option data-subtext="">Choose a Weapon!</option>
+               <!-- Simple Melee Weapons -->
+              <option data-subtext="Bludgeoning">Club</option>
+              <option data-subtext="Piercing">Dagger</option>
+              <option data-subtext="Bludgeoning">Great Club</option>
+              <option data-subtext="Slashing">Handaxe</option>
+              <option data-subtext="Piercing">Javelin</option>
+              <option data-subtext="Bludgeoning">Light Hammer</option>
+              <option data-subtext="Bludgeoning">Mace</option>
+              <option data-subtext="Bludgeoning">Quaterstaff</option>
+              <option data-subtext="Slashing">Sickle</option>
+              <option data-subtext="Piercing">Spear</option>
+              
+                <!-- Martial Melee Weapons -->
+              <option data-subtext="Slashing">Battleaxe</option>
+
+
+
+            </select>
+          </div>
+          <h5 class="mt-4">Select Enemy</h5>
+          <div class="row-fluid">
+            <select class="selectpicker" id ="enemy" data-show-subtext="true" data-live-search="true">
+              <option data-subtext="">Choose an Enemy!</option>
+               <!-- Abberation -->
+               <option data-subtext="Abberation">Aboleth</option>
+               <option data-subtext="Abberation">Chuul</option>
+               <option data-subtext="Abberation">Cloaker</option>
+               <option data-subtext="Abberation">Gibbering Mouther</option>
+               <option data-subtext="Abberation">Otyugh</option>
+               <!-- Beast -->
+
+
+
+
+
+
+
+
+
+
+              
+
+
+              
+              
+              
+              <!-- Undead Monsters -->
+              
+              <option data-subtext="Undead">Ghoul</option>
+              <option data-subtext="Undead">Lich</option>
+              <option data-subtext="Undead">Minotaur Skeleton</option>
+              <option data-subtext="Undead">Mummy</option>
+              <option data-subtext="Undead">Mummy Lord</option>
+              <option data-subtext="Undead">Ogre Zombie</option>
+              <option data-subtext="Undead">Shadow</option>
+              <option data-subtext="Undead">Skeleton</option>
+              <option data-subtext="Undead">Specter</option>
+              <option data-subtext="Undead">Vampire Spawn</option>
+              <option data-subtext="Undead">Warhorse Skeleton </option>
+              <option data-subtext="Undead">Will-o'-Wisp </option>
+              <option data-subtext="Undead">Wraith</option>
+              <option data-subtext="Undead">Zombie</option>
+              <option data-subtext="Undead">Vampire</option>
+               <!--  -->
+
+               
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+
+ 
+
+
+
+
+
+            </select>
+          </div>
+
+
+          <div class = "row-fluid mt-4">
+              <button type="button" id ="killButton" class="btn btn-danger" onclick="generateSentence()" disabled>Kill em!</button>
+            </div>
+        </form>
+        <br>
+          <div id="test"></div>          
+          
+          <ul class="list-unstyled">
+            <li></li>
+            <li></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="../vendor/jquery/jquery.min.js"></script>
+    <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../node_modules/bootstrap-select/dist/js/bootstrap-select.js"></script>
+
+
+   <script>
+   var weapon = "";
+   var enemy = "";
+   var adjectives = ["beautiful", "lazy", "professional", "lovely", "dumb", "rough", "soft", "hot", "vibrating", "slimy"];
+   var pastTenseBludgeonVerbs = ["crushed", "smashed", "smooshed", "eradicated", "smoked", "slammed", "shattered"];
+   var presentTenseBludgeonVerbs = ["crush", "smash", "smoosh", "eradicate", "smoke", "slam", "shatter"];
+   
+   var pastTensePiercingVerbs = ["pierced", "penetrated", "punctured", "punched", "perforated", "pricked", "probed", "spiked", "sticked", "impaled"];
+   var presentTensePiercingVerbs = ["pierce", "penetrate", "puncture", "punch", "perforate", "prick", "probe", "spike", "stick", "impale"];
+   
+   var pastTenseSlashingVerbs = ["slashed", "slit", "lacerated", "cut", "gashed", "severed", "cleaved", "carved"];
+   var presentTenseSlashingVerbs = ["slash", "slit", "lacerate", "cut", "gash", "sever", "cleave", "carve"];
+   
+   
+   var killingBlowWords = ["killing", "destroying", "eradicating", "annihilating","obliterating", "eliminating", "exterminating", "terminating", "slaughtering", "decimating"];
+   var dieVerbs = ["dies", "perishes", "breathes its last breathe", "is eradicated" , "life force is destroyed", "bleeds out"]
+
+   var adverbs = ["slowly", "elegantly", "precisely", "quickly", "sadly", "humbly", "proudly", "shockingly", "calmly", "passionately"];
+   var enemyType;
+   var weaponType;
+
+
+
+   $('#weapon').change(function () {
+     weapon = $(this).find("option:selected").text();
+     weaponType = $(this).find("option:selected").data('subtext');
+     emptyCheck();
+     console.log(weaponType);
+     
+});
+
+  $('#enemy').change(function () {
+    enemy = $(this).find("option:selected").text();
+    emptyCheck();
+   });
+   
+    function generateSentence() {
+    document.getElementById("test").innerHTML = sentence();
+    console.log("In here");
+}
+
+
+    function emptyCheck(){
+      if (weapon != "" && enemy != "" && weapon != "Choose a Weapon!" && enemy != "Choose an Enemy!") {
+          $('#killButton').prop("disabled", false);
+          document.getElementById("killButton").innerHTML = "Kill Em!"
+          console.log("In here");
+      } else{
+        document.getElementById("killButton").innerHTML = "Choose a weapon and enemy!"
+        $('#killButton').prop("disabled", true);
+        console.log("Disabled");
+        console.log(weapon);
+      }
+    }
+    
+    function sentence(){
+      var rand1 = Math.floor(Math.random() * 10);
+      var rand2 = Math.floor(Math.random() * 6);
+      var sentenceStructureRand = Math.floor(Math.random() * 4);  
+      var verbs = getVerbs();
+      console.log(verbs)
+      var presentTenseVerb = verbs.presentTenseVerb;
+      var pastTenseVerb = verbs.pastTenseVerb;
+      var adjective = adjectives[rand1];
+
+      
+
+
+     var sentenceStructures = [["The " + enemy +  " is " + adverbs[rand1] + " " + pastTenseVerb + " " + "by your " + weapon + "!"],
+                                ["You " +adverbs[rand1] + " " + presentTenseVerb + " the " +adjective+ " " + enemy + "!" ], 
+                                ["Your target the " + adjective + " " + enemy + " " + adverbs[rand1] + " "+killingBlowWords[rand1] +  " it with your " + weapon + "!"],
+                                [capitalizeFirstLetter(pastTenseVerb) + " "+adverbs[rand1] + " by your " + weapon + " the " + enemy+ " " +dieVerbs[rand2]  +"!"],
+                                ["Cowering before you the " +adjective+ " " + enemy + " is finished off " + adverbs[rand1] + " by your " + weapon + "!"]];
+    
+      return sentenceStructures[sentenceStructureRand][0];
+    }
+    
+    function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+    
+    //returns specific verb based on weapon 
+    function getVerbs(){
+     //Rand number
+      var bludgeoningRand = Math.floor(Math.random() * 7);
+      var piercingRand = Math.floor(Math.random() * 10);
+      var slashingRand = Math.floor(Math.random() * 8);
+      var presentTenseVerb;
+      var pastTenseVerb;
+
+      //Check weapon types and set verb variables accordingly
+      if (weaponType == "Bludgeoning") {
+          pastTenseVerb = pastTenseBludgeonVerbs[bludgeoningRand];
+          presentTenseVerb = presentTenseBludgeonVerbs[bludgeoningRand];
+          return {
+            pastTenseVerb: pastTenseVerb,
+            presentTenseVerb: presentTenseVerb
+          };
+      } else if(weaponType == "Piercing") {
+            pastTenseVerb = pastTensePiercingVerbs[piercingRand];
+            presentTenseVerb = presentTensePiercingVerbs[piercingRand];
+          return {
+            pastTenseVerb: pastTenseVerb,
+            presentTenseVerb: presentTenseVerb
+          };
+      } else if(weaponType == "Slashing") {
+            pastTenseVerb = pastTenseSlashingVerbs[slashingRand];
+            presentTenseVerb = presentTenseSlashingVerbs[slashingRand];
+          return {
+            pastTenseVerb: pastTenseVerb,
+            presentTenseVerb: presentTenseVerb
+          };
+  
+       }
+ 
+    }
+    
+
+    </script>
+
+
+  </body>
+
+</html>
