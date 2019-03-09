@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>KillShot</title>
+    <title>Killshot</title>
       <!-- Favicon -->
       <link href="img/favicon.ico" rel="icon" type="image/x-icon" />
 
@@ -18,10 +18,14 @@
     <link href ="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.2/css/bootstrap-select.css" rel="stylesheet">
 
     <!---CUSTOM CSS-->
-    <link href ="/src/styles/killshot.css" rel="stylesheet">
+    <link href ="src/styles/killshot.css" rel="stylesheet">
+
+    
+    <!--Custom js scripts-->
+    <script src="src/js/generator.js" type="text/javascript"></script>
   </head>
 
-  <body>
+  <body onload="showSavedSentences()">
       <nav class="navbar navbar-light bg-dark">
           <span class="navbar-text">
              
@@ -33,7 +37,7 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-12 text-center">
-          <h1 class ="mt-4"> KillShot Generator!</h1>
+          <h1 class ="mt-4"> Killshot Generator!</h1>
           <form>
           <h5 class="mt-5">Select Weapon</h5>
           <div class="row-fluid">
@@ -123,13 +127,19 @@
         </form>
         <br>
           <div id="test"></div>          
-          
-          <ul class="list-unstyled">
-            <li></li>
-            <li></li>
+      </br>
+      <button type="button" id ="saveButton" class="btn btn-primary" onclick="saveSentence()" disabled>Save Sentence</button>
+    </br>
+  </br>
+        <h4>Saved Sentences</h4>
+          <ul class="list-unstyled" id ="renderList" > 
+            
           </ul>
+          <button type="button" id ="clearButton" class="btn btn-alert" onclick="clearSaved()" >Clear Saved</button>
         </div>
+        
       </div>
+
     </div>
 
     <!-- Bootstrap core JavaScript -->
@@ -141,32 +151,14 @@
    <script>
    var weapon = "";
    var enemy = "";
-   var adjectives = ["beautiful", "lazy", "professional", "lovely", "dumb", "rough", "soft", "hot", "vibrating", "slimy"];
-   var pastTenseBludgeonVerbs = ["crushed", "smashed", "smooshed", "eradicated", "smoked", "slammed", "shattered"];
-   var presentTenseBludgeonVerbs = ["crush", "smash", "smoosh", "eradicate", "smoke", "slam", "shatter"];
-   
-   var pastTensePiercingVerbs = ["pierced", "penetrated", "punctured", "punched", "perforated", "pricked", "probed", "spiked", "sticked", "impaled"];
-   var presentTensePiercingVerbs = ["pierce", "penetrate", "puncture", "punch", "perforate", "prick", "probe", "spike", "stick", "impale"];
-   
-   var pastTenseSlashingVerbs = ["slashed", "slit", "lacerated", "cut", "gashed", "severed", "cleaved", "carved"];
-   var presentTenseSlashingVerbs = ["slash", "slit", "lacerate", "cut", "gash", "sever", "cleave", "carve"];
-   
-   
-   var killingBlowWords = ["killing", "destroying", "eradicating", "annihilating","obliterating", "eliminating", "exterminating", "terminating", "slaughtering", "decimating"];
-   var dieVerbs = ["dies", "perishes", "breathes its last breathe", "is eradicated", "passes away", "bleeds out", "bites the dust", "deceases", "meets it maker", "succumbs to its wounds", "rendered lifeless"];
-
-   var adverbs = ["slowly", "elegantly", "precisely", "quickly", "sadly", "humbly", "proudly", "shockingly", "calmly", "passionately"];
    var enemyType;
    var weaponType;
-
-
+   var savedSentences = [];
 
    $('#weapon').change(function () {
      weapon = $(this).find("option:selected").text();
      weaponType = $(this).find("option:selected").data('subtext');
      emptyCheck();
-     console.log(weaponType);
-     
 });
 
   $('#enemy').change(function () {
@@ -176,86 +168,48 @@
    
     function generateSentence() {
     document.getElementById("test").innerHTML = sentence();
-    console.log("In here");
+    saveButtonDisable();
+}
+
+//Save current sentence to local storage
+function saveSentence(){
+  var sentence = document.getElementById("test").innerHTML;
+  savedSentences.push(sentence);
+  localStorage['savedSentences'] = JSON.stringify(savedSentences);
+  showSavedSentences();
 }
 
 
-    function emptyCheck(){
-      if (weapon != "" && enemy != "" && weapon != "Choose a Weapon!" && enemy != "Choose an Enemy!") {
-          $('#killButton').prop("disabled", false);
-          document.getElementById("killButton").innerHTML = "Kill Em!"
-          console.log("In here");
-      } else{
-        document.getElementById("killButton").innerHTML = "Choose a weapon and enemy!"
-        $('#killButton').prop("disabled", true);
-        console.log("Disabled");
-        console.log(weapon);
-      }
+
+//Show list of saved sentences
+  function showSavedSentences(){
+    var sentences = JSON.parse(localStorage['savedSentences']);
+    var str = '';
+
+    sentences.forEach(function(sentence) {
+      console.log(sentence);
+      if (sentence) {
+      str += '<li>'+ sentence + '</li>';
     }
+    });
+    document.getElementById("renderList").innerHTML = str;
+  }
+
+  function saveButtonDisable(){
+    console.log(document.getElementById("test").innerHTML);
     
-    function sentence(){
-      var rand1 = Math.floor(Math.random() * 10);
-      var rand2 = Math.floor(Math.random() * 11);
-      var sentenceStructureRand = Math.floor(Math.random() * 4);  
-      var verbs = getVerbs();
-      console.log(verbs)
-      var presentTenseVerb = verbs.presentTenseVerb;
-      var pastTenseVerb = verbs.pastTenseVerb;
-      var adjective = adjectives[rand1];
-
-      
-
-
-     var sentenceStructures = [["The " + enemy +  " is " + adverbs[rand1] + " " + pastTenseVerb + " " + "by your " + weapon + "!"],
-                                ["You " +adverbs[rand1] + " " + presentTenseVerb + " the " +adjective+ " " + enemy + "!" ], 
-                                ["Your target the " + adjective + " " + enemy + " " + adverbs[rand1] + " "+killingBlowWords[rand1] +  " it with your " + weapon + "!"],
-                                [capitalizeFirstLetter(pastTenseVerb) + " "+adverbs[rand1] + " by your " + weapon + " the " + enemy+ " " +dieVerbs[rand2]  +"!"],
-                                ["Cowering before you the " +adjective+ " " + enemy + " is finished off " + adverbs[rand1] + " by your " + weapon + "!"]];
-    
-      return sentenceStructures[sentenceStructureRand][0];
+    if  (document.getElementById("test").innerHTML != '') {
+      $('#saveButton').prop("disabled", false);
     }
-    
-    function capitalizeFirstLetter(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-}
+  }
 
-    
-    //returns specific verb based on weapon 
-    function getVerbs(){
-     //Rand number
-      var bludgeoningRand = Math.floor(Math.random() * 7);
-      var piercingRand = Math.floor(Math.random() * 10);
-      var slashingRand = Math.floor(Math.random() * 8);
-      var presentTenseVerb;
-      var pastTenseVerb;
+  function clearSaved(){
+    localStorage.clear();
+    savedSentences = [];
+    document.getElementById("renderList").innerHTML = '';
+  }
 
-      //Check weapon types and set verb variables accordingly
-      if (weaponType == "Bludgeoning") {
-          pastTenseVerb = pastTenseBludgeonVerbs[bludgeoningRand];
-          presentTenseVerb = presentTenseBludgeonVerbs[bludgeoningRand];
-          return {
-            pastTenseVerb: pastTenseVerb,
-            presentTenseVerb: presentTenseVerb
-          };
-      } else if(weaponType == "Piercing") {
-            pastTenseVerb = pastTensePiercingVerbs[piercingRand];
-            presentTenseVerb = presentTensePiercingVerbs[piercingRand];
-          return {
-            pastTenseVerb: pastTenseVerb,
-            presentTenseVerb: presentTenseVerb
-          };
-      } else if(weaponType == "Slashing") {
-            pastTenseVerb = pastTenseSlashingVerbs[slashingRand];
-            presentTenseVerb = presentTenseSlashingVerbs[slashingRand];
-          return {
-            pastTenseVerb: pastTenseVerb,
-            presentTenseVerb: presentTenseVerb
-          };
-  
-       }
- 
-    }
-    
+
 
     </script>
 
