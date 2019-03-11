@@ -10,7 +10,7 @@ var presentTenseSlashingVerbs = ["slash", "slit", "lacerate", "cut", "gash", "se
 
 
 var killingBlowWords = ["killing", "destroying", "eradicating", "annihilating","obliterating", "eliminating", "exterminating", "terminating", "slaughtering", "decimating"];
-var dieVerbs = ["dies", "perishes", "breathes its last breathe", "is eradicated", "passes away", "bleeds out", "bites the dust", "deceases", "meets it maker", "succumbs to its wounds", "rendered lifeless"];
+var dieVerbs = ["dies", "perishes", "breathes its last breathe", "is eradicated", "passes away", "bleeds out", "bites the dust", "deceases", "meets it's maker", "succumbs to its wounds", "is rendered lifeless"];
 
 var adverbs = ["slowly", "elegantly", "precisely", "quickly", "sadly", "humbly", "proudly", "shockingly", "calmly", "passionately"];
 
@@ -80,9 +80,7 @@ function sentence(){
                pastTenseVerb: pastTenseVerb,
                presentTenseVerb: presentTenseVerb
              };
-     
           }
-    
        }
 
        

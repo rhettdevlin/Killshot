@@ -23,9 +23,10 @@
     
     <!--Custom js scripts-->
     <script src="src/js/generator.js" type="text/javascript"></script>
+    <script src="src/js/enemies.js" type="text/javascript"></script>
   </head>
 
-  <body onload="showSavedSentences()">
+  <body onload="load()">
       <nav class="navbar navbar-light bg-dark">
           <span class="navbar-text">
              
@@ -58,6 +59,24 @@
               
                 <!-- Martial Melee Weapons -->
               <option data-subtext="Slashing">Battleaxe</option>
+              <option data-subtext="Bludgeoning">Flail</option>
+              <option data-subtext="Slashing">Glaive</option>
+              <option data-subtext="Slashing">Greataxe</option>
+              <option data-subtext="Slashing">Greatsword</option>
+              <option data-subtext="Slashing">Battleaxe</option>
+              <option data-subtext="Piercing">Lance</option>
+              <option data-subtext="Slashing">Longsword</option>
+              <option data-subtext="Bludgeoning">Maul</option>
+              <option data-subtext="Slashing">Morningstar</option>
+              <option data-subtext="Piercing">Pike</option>
+              <option data-subtext="Piercing">Rapier</option>
+              <option data-subtext="Piercing">Shortsword</option>
+              <option data-subtext="Piercing">War Pick</option>
+              <option data-subtext="Piercing">Scimitar</option>
+              <option data-subtext="Bludgeoning">Warhammer</option>
+              <option data-subtext="Slashing">Whip</option>
+
+
 
 
 
@@ -67,56 +86,6 @@
           <div class="row-fluid">
             <select class="selectpicker" id ="enemy" data-show-subtext="true" data-live-search="true">
               <option data-subtext="">Choose an Enemy!</option>
-              <option data-subtext="BIG BAD MONSTER">Austin</option>
-               <!-- Abberation -->
-               <option data-subtext="Abberation">Aboleth</option>
-               <option data-subtext="Abberation">Chuul</option>
-               <option data-subtext="Abberation">Cloaker</option>
-               <option data-subtext="Abberation">Gibbering Mouther</option>
-               <option data-subtext="Abberation">Otyugh</option>
-               <!-- Beast -->
-              
-
-              
-              
-              
-              <!-- Undead Monsters -->
-              <option data-subtext="Undead">Ghoul</option>
-              <option data-subtext="Undead">Lich</option>
-              <option data-subtext="Undead">Minotaur Skeleton</option>
-              <option data-subtext="Undead">Mummy</option>
-              <option data-subtext="Undead">Mummy Lord</option>
-              <option data-subtext="Undead">Ogre Zombie</option>
-              <option data-subtext="Undead">Shadow</option>
-              <option data-subtext="Undead">Skeleton</option>
-              <option data-subtext="Undead">Specter</option>
-              <option data-subtext="Undead">Vampire Spawn</option>
-              <option data-subtext="Undead">Warhorse Skeleton </option>
-              <option data-subtext="Undead">Will-o'-Wisp </option>
-              <option data-subtext="Undead">Wraith</option>
-              <option data-subtext="Undead">Zombie</option>
-              <option data-subtext="Undead">Vampire</option>
-               <!--  -->
-
-               
- 
- 
- 
- 
- 
- 
- 
- 
- 
-
- 
-
- 
-
-
-
-
-
             </select>
           </div>
 
@@ -128,14 +97,14 @@
         <br>
           <div id="test"></div>          
       </br>
-      <button type="button" id ="saveButton" class="btn btn-primary" onclick="saveSentence()" disabled>Save Sentence</button>
+      <button type="button" id ="saveButton" class="btn btn-info" onclick="saveSentence()" disabled>Save Sentence</button>
     </br>
   </br>
         <h4>Saved Sentences</h4>
           <ul class="list-unstyled" id ="renderList" > 
             
           </ul>
-          <button type="button" id ="clearButton" class="btn btn-alert" onclick="clearSaved()" >Clear Saved</button>
+          <button type="button" id ="clearButton" class="btn btn-dark" onclick="clearSaved()" >Clear Saved</button>
         </div>
         
       </div>
@@ -183,17 +152,19 @@ function saveSentence(){
 
 //Show list of saved sentences
   function showSavedSentences(){
-    var sentences = JSON.parse(localStorage['savedSentences']);
-    var str = '';
-
-    sentences.forEach(function(sentence) {
-      console.log(sentence);
-      if (sentence) {
-      str += '<li>'+ sentence + '</li>';
-    }
-    });
-    document.getElementById("renderList").innerHTML = str;
+  if ('savedSentences' in localStorage) {
+      var sentences = JSON.parse(localStorage['savedSentences']);
+      var str = '';
+      sentences.forEach(function(sentence) {
+        console.log(sentence);
+        if (sentence) {
+        str += '<li>'+ sentence + '</li>';
+      }
+      });
+      document.getElementById("renderList").innerHTML = str;
   }
+  }
+
 
   function saveButtonDisable(){
     console.log(document.getElementById("test").innerHTML);
@@ -203,13 +174,28 @@ function saveSentence(){
     }
   }
 
+  function load() {
+   loadEnemies(beasts, "Beast");
+   loadEnemies(abberations, "Aberation");
+   loadEnemies(celestials, "Celestial");
+   loadEnemies(constructs, "Construct");
+   loadEnemies(dragons, "Dragon");
+   loadEnemies(fey, "Fey");
+   loadEnemies(fiends, "Fiend");
+   loadEnemies(giants, "Giant");
+   loadEnemies(monstrosities, "Monstrosity");
+   loadEnemies(ooze, "Ooze");
+   loadEnemies(plants, "Plant");
+   loadEnemies(shapechangers, "Shapechanger");
+   loadEnemies(undeads, "Undead");
+   showSavedSentences();
+  }
+
   function clearSaved(){
     localStorage.clear();
     savedSentences = [];
     document.getElementById("renderList").innerHTML = '';
   }
-
-
 
     </script>
 
