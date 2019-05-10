@@ -35,7 +35,7 @@
 
 
     <!-- Page Content -->
-    <div class="container">
+    <div class="container-fluid">
       <div class="row">
         <div class="col-lg-12 text-center">
           <h1 class ="mt-4"> Killshot Generator!</h1>
@@ -152,7 +152,7 @@ function saveSentence(){
       var sentences = JSON.parse(localStorage['savedSentences']);
       var str = '';
       sentences.forEach(function(sentence) {
-        console.log(sentence);
+       // console.log(sentence);
         if (sentence) {
         str += '<li>'+ sentence + '</li>';
       }
@@ -163,7 +163,7 @@ function saveSentence(){
 
 
   function saveButtonDisable(){
-    console.log(document.getElementById("test").innerHTML);
+   // console.log(document.getElementById("test").innerHTML);
     
     if  (document.getElementById("test").innerHTML != '') {
       $('#saveButton').prop("disabled", false);
