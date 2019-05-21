@@ -1,3 +1,13 @@
+
+
+
+
+
+
+
+
+
+//Global Arrays
 var adjectives = ["beautiful", "lazy", "professional", "lovely", "dumb", "rough", "soft", "hot", "vibrating", "slimy"];
 var pastTenseBludgeonVerbs = ["crushed", "smashed", "smooshed", "eradicated", "smoked", "slammed", "shattered"];
 var presentTenseBludgeonVerbs = ["crush", "smash", "smoosh", "eradicate", "smoke", "slam", "shatter"];

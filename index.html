@@ -91,7 +91,7 @@
             </div>
         </form>
         <br>
-          <div id="test"></div>          
+          <div id="generatedText"></div>          
       </br>
       <button type="button" id ="saveButton" class="btn btn-info" onclick="saveSentence()" disabled>Save Sentence</button>
     </br>
@@ -120,25 +120,28 @@
    var weaponType;
    var savedSentences = [];
 
+   //Update current weapon to selected weapon
    $('#weapon').change(function () {
      weapon = $(this).find("option:selected").text();
      weaponType = $(this).find("option:selected").data('subtext');
      emptyCheck();
 });
 
+ //Update current enemy to selected enemy 
   $('#enemy').change(function () {
     enemy = $(this).find("option:selected").text();
     emptyCheck();
    });
-   
+
+  //Invoke the generator
     function generateSentence() {
-    document.getElementById("test").innerHTML = sentence();
+    document.getElementById("generatedText").innerHTML = sentence();
     saveButtonDisable();
 }
 
 //Save current sentence to local storage
 function saveSentence(){
-  var sentence = document.getElementById("test").innerHTML;
+  var sentence = document.getElementById("generatedText").innerHTML;
   savedSentences.push(sentence);
   localStorage['savedSentences'] = JSON.stringify(savedSentences);
   showSavedSentences();
@@ -161,15 +164,16 @@ function saveSentence(){
   }
   }
 
-
+  //Disable save button till the sentence is generated
   function saveButtonDisable(){
-   // console.log(document.getElementById("test").innerHTML);
+   // console.log(document.getElementById("generatedText").innerHTML);
     
-    if  (document.getElementById("test").innerHTML != '') {
+    if  (document.getElementById("generatedText").innerHTML != '') {
       $('#saveButton').prop("disabled", false);
     }
   }
 
+  //load all types of enemies
   function load() {
    loadEnemies(beasts, "Beast");
    loadEnemies(abberations, "Aberation");
@@ -187,6 +191,7 @@ function saveSentence(){
    showSavedSentences();
   }
 
+  //clear local cache
   function clearSaved(){
     localStorage.clear();
     savedSentences = [];

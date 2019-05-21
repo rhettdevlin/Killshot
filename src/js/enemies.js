@@ -1,3 +1,5 @@
+
+//Arrays of different types of enemies
 var abberations = ["Aboleth","Chuul", "Cloaker", "Gibbering Mouther", "Otyugh"];
 var beasts = ["Ape ","Axe Beak ","Baboon ","Badger ","Bat ","Black bear ","Blood Hawk ","Boar ","Brown Bear ","Camel ","Cat ","Constrictor Snake ","Crab ","Crocodile ","Deer ","Dire Wolf ","Draft Horse ","Eagle ","Elephant ","Elk ","Flying Snake ","Frog ","Giant Ape ","Giant Badger ","Giant Bat ","Giant Boar ","Giant Centipede ","Giant Constrictor Snake ","Giant Crab ","Giant Crocodile ","Giant Eagle ","Giant Elk ","Giant Fire Beetle ","Giant Frog ","Giant Goat ","Giant Hyena ","Giant Lizard ","Giant Octopus ","Giant Owl ","Giant Poisonous Snake ","Giant Rat ","Giant Scorpion ","Giant Sea Horse ","Giant Shark ","Giant Spider ","Giant Toad ","Giant Vulture ","Giant Wasp ","Giant Weasel ","Giant Wolf Spider ","Goat ","Hawk ","Hunter Shark ","Hyena ","Jackal ","Killer Whale ","Lion ","Lizard ","Mammoth ","Mastiff ","Mule ","Octopus ","Owl ","Panther ","Phase Spider ","Plesiosaurus ","Poisonous Snake ","Polar Bear ","Pony ","Quipper ","Rat ","Raven ","Reef Shark ","Rhinoceros ","Riding Horse ","Saber-Toothed Tiger ","Scorpion ","Sea Horse ","Spider ","Stirge ","Tiger ","Triceratops ","Tyrannosaurus Rex ","Vulture ","Warhorse ","Weasel ","Wolf"];
 var celestials = ["Couatl", "Deva", "Pegasus", "Planetar", "Solar", "Unicorn"];
@@ -13,7 +15,7 @@ var plants = ["Awakened Shrub ","Awakened Tree ","Shambling Mound ","Shrieker ",
 var shapechangers = ["Mimic","Vampire", "Werebear ","Wereboar ","Wererat ","Weretiger ", "Werewolf"];
 var undeads = ["Ghast ","Ghost ","Ghoul ","Lich ","Minotaur Skeleton ","Mummy ","Mummy Lord ","Ogre Zombie ","Shadow ","Skeleton ","Specter ","Vampire Spawn ","Warhorse Skeleton ","Wight ","Will-o'-Wisp ","Wraith ","Zombie"];
 
-
+//Modular load enemies function that adds enemy and enemyType to selectable dropdown
 function loadEnemies(enemies, enemyType){
     var str = '';
     enemies.forEach(function(enemy) {
